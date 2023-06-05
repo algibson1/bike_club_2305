@@ -34,6 +34,6 @@ describe Ride do
 
   it 'has a total distance, based on trail type being a loop or out-and-back' do
     expect(@ride1.total_distance).to eq(21.4)
-    expect(@ride1.total_distance).to eq(14.9)
+    expect(@ride2.total_distance).to eq(14.9)
   end
 end
