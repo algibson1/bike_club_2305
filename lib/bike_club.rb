@@ -15,4 +15,11 @@ class BikeClub
       biker.rides.values.flatten.length
     end
   end
+
+  def best_record(ride)
+    bikers_with_ride = @bikers.select { |biker| biker.rides.include?(ride) }
+      bikers_with_ride.min_by do |biker|
+        biker.rides[ride].sort[0]
+      end
+  end
 end
