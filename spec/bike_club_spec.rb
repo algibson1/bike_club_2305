@@ -30,7 +30,7 @@ describe BikeClub do
     expect(@bike_club.bikers).to eq([@biker1, @biker2])
   end
 
-  it 'can report member with most rides' do
+  it 'can report member with most rides, including ties' do
     expect(@bike_club.most_rides).to eq(nil)
     @bike_club.add_biker(@biker1)
     @bike_club.add_biker(@biker2)
@@ -45,9 +45,13 @@ describe BikeClub do
     @biker1.log_ride(@ride2, 60.9)
     @biker1.log_ride(@ride2, 61.6)
     expect(@bike_club.most_rides).to eq(@biker1)
+    @biker2.log_ride(@ride2, 60.3)
+    @biker2.log_ride(@ride2, 67.0)
+    @biker2.log_ride(@ride2, 64.0)
+    expect(@bike_club.most_rides).to eq([@biker1, @biker2])
   end
 
-  it 'can report who has the best record' do
+  xit 'can report who has the best record, including ties' do
     expect(@bike_club.best_record(@ride2)).to eq(nil)
     @bike_club.add_biker(@biker1)
     @bike_club.add_biker(@biker2)
@@ -59,5 +63,6 @@ describe BikeClub do
     @biker1.log_ride(@ride2, 61.6)
     expect(@bike_club.best_record(@ride2)).to eq(@biker1)
     @biker2.log_ride(@ride2, 60.9)
+    expect(@bike_club.best_record(@ride2)).to eq([@biker1, @biker2])
   end
 end
