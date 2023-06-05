@@ -47,4 +47,17 @@ describe BikeClub do
     expect(@bike_club.most_rides).to eq(@biker1)
   end
 
+  it 'can report who has the best record' do
+    expect(@bike_club.best_record(@ride2)).to eq(nil)
+    @bike_club.add_biker(@biker1)
+    @bike_club.add_biker(@biker2)
+    @biker2.learn_terrain!(:gravel)
+    @biker2.log_ride(@ride2, 65.0)
+    expect(@bike_club.best_record(@ride2)).to eq(@biker2)
+    @biker1.learn_terrain!(:gravel)
+    @biker1.log_ride(@ride2, 60.9)
+    @biker1.log_ride(@ride2, 61.6)
+    expect(@bike_club.best_record(@ride2)).to eq(@biker1)
+    @biker2.log_ride(@ride2, 60.9)
+  end
 end
