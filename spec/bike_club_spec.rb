@@ -75,5 +75,7 @@ describe BikeClub do
     @bike_club.add_biker(@biker2)
     @biker2.learn_terrain!(:hills)
     expect(@bike_club.eligible?(@biker2, @ride1)).to eq(false)
+    @biker2.learn_terrain!(:gravel)
+    expect(@bike_club.eligible?(@biker2, @ride2)).to eq(true)
   end
 end
