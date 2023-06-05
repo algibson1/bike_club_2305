@@ -36,14 +36,14 @@ describe Biker do
   end
 
   it 'can learn different terrains' do
-    biker.learn_terrain!(:gravel)
-    biker.learn_terrain!(:hills)
+    @biker.learn_terrain!(:gravel)
+    @biker.learn_terrain!(:hills)
     expect(@biker.acceptable_terrain).to eq([:gravel, :hills])
   end
 
   it 'can log rides, if they have learned that terrain and can handle that distance' do
-    biker.learn_terrain!(:gravel)
-    biker.learn_terrain!(:hills)
+    @biker.learn_terrain!(:gravel)
+    @biker.learn_terrain!(:hills)
     @biker.log_ride(@ride1, 92.5)
     @biker.log_ride(@ride1, 91.1)
     @biker.log_ride(@ride2, 60.9)
@@ -52,7 +52,7 @@ describe Biker do
     @biker2.log_ride(@ride1, 97.0)
     @biker2.log_ride(@ride2, 67.0)
     expect(@biker2.rides).to eq({})
-    @biker2.learn_terrin!(:hills)
+    @biker2.learn_terrain!(:hills)
     @biker2.learn_terrain!(:gravel)
     @biker2.log_ride(@ride1, 95.0)
     @biker2.log_ride(@ride2, 65.0)
@@ -60,15 +60,15 @@ describe Biker do
   end
 
   it 'has personal records for each ride taken' do
-    biker.learn_terrain!(:gravel)
-    biker.learn_terrain!(:hills)
+    @biker.learn_terrain!(:gravel)
+    @biker.learn_terrain!(:hills)
     @biker.log_ride(@ride1, 92.5)
     @biker.log_ride(@ride1, 91.1)
     @biker.log_ride(@ride2, 60.9)
     @biker.log_ride(@ride2, 61.6)
     expect(@biker.personal_record(@ride1)).to eq(91.1)
     expect(@biker.personal_record(@ride2)).to eq(60.9)
-    @biker2.learn_terrin!(:hills)
+    @biker2.learn_terrain!(:hills)
     @biker2.learn_terrain!(:gravel)
     @biker2.log_ride(@ride1, 95.0)
     @biker2.log_ride(@ride2, 65.0)
