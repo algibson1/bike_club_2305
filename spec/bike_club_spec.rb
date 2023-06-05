@@ -65,4 +65,15 @@ describe BikeClub do
     @biker2.log_ride(@ride2, 60.9)
     expect(@bike_club.best_record(@ride2)).to eq({[@biker1, @biker2] => 60.9})
   end
+
+  it 'can report if a biker is eligible for a ride if terrain is acceptable and total distance does not exceed max distance' do
+    expect(@bike_club.eligible?(@biker1, @ride1)).to eq("Member not found")
+    @bike_club.add_biker(@biker1)
+    expect(@bike_club.eligible?(@biker1, @ride1)).to eq(false)
+    @biker1.learn_terrain!(:hills)
+    expect(@bike_club.eligible?(@biker1, @ride1)).to eq(true)
+    @bike_club.add_biker(@biker2)
+    @biker2.learn_terrain!(:hills)
+    expect(@bike_club.eligible?(@biker2, @ride1)).to eq(false)
+  end
 end
