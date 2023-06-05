@@ -25,7 +25,7 @@ class BikeClub
     return nil if @bikers.none? { |biker| biker.rides.include?(ride) }
     bikers_with_ride = @bikers.select { |biker| biker.rides.include?(ride) }
       bikers_ranked = bikers_with_ride.group_by do |biker|
-        biker.rides[ride].sort[0]
+        biker.personal_record(ride)
       end
     best_time = bikers_ranked.keys.min
     record = Hash.new
