@@ -32,4 +32,9 @@ class BikeClub
     record[bikers_ranked[best_time]] = best_time
     record
   end
+
+  def eligible?(biker, ride)
+    return "Member not found" unless @bikers.include?(biker)
+    biker.acceptable_terrain.include?(ride.terrain) && biker.max_distance >= ride.total_distance
+  end
 end
